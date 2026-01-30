@@ -15,7 +15,7 @@ from sam2.build_sam import build_sam2_video_predictor
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
 
-# Basic setup
+# initial setup
 PRODUCTS_ROOT = Path("products")
 CHECKPOINT_PATH = Path("sam2.1_hiera_tiny.pt")
 MODEL_CONFIG = "sam2.1/sam2.1_hiera_t.yaml"
@@ -53,7 +53,7 @@ def write_text_report(data, mAP_scores):
     separator = "-" * 55 + "\n"
     
     with open(REPORT_FILE_TXT, "w") as f:
-        f.write("=== SAM 2.1 Full Evaluation Report ===\n\n")
+        f.write("=== SAM Report ===\n\n")
         f.write("--- mAP Summary ---\n")
         for prod, score in mAP_scores.items():
             f.write(f"{prod}: {score:.4f}\n")
@@ -64,7 +64,7 @@ def write_text_report(data, mAP_scores):
         for entry in data:
             f.write(f"{entry['product']:<15} | {entry['image']:<25} | {entry['iou']:<10.4f}\n")
     
-    print(f"\n[SUCCESS] Detailed report saved to: {REPORT_FILE_TXT}")
+    print(f"\n[success] Detailed report saved: {REPORT_FILE_TXT}")
 
 def evaluate_products():
     if not OUTPUT_DIR.exists():
@@ -166,7 +166,7 @@ def evaluate_products():
                     "score": 1.0
                 })
 
-            # Calculate IoU for tabular report
+            # calculate IoU for tabular report
             iou_val = calculate_iou(pred_coords, gt_coords)
             all_results_data.append({
                 "product": p_folder.name,
@@ -208,7 +208,7 @@ def evaluate_products():
                 f.write(f"## {p_folder.name}\n")
                 f.write(f"mAP: {map_score:.4f}\n\n")
 
-    # Final Text Report
+    # final text report
     write_text_report(all_results_data, final_mAP_scores)
 
 if __name__ == "__main__":

@@ -126,7 +126,7 @@ def predict_tracking(source_img, source_mask, target_img):
 
 # --- GRADIO UI ---
 with gr.Blocks() as demo:
-    gr.Markdown("# 🚀 SAM 2.1 Zero-Shot Object Tracker")
+    gr.Markdown("# SAM 2.1 Zero-Shot Object Tracker")
     gr.Markdown("Upload a source image, its bounding mask, and a target image to predict the new location.")
     
     with gr.Row():

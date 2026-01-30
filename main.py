@@ -14,16 +14,16 @@ from hydra import initialize_config_dir
 import sam2
 from sam2.build_sam import build_sam2_video_predictor
 
-# Getting current directory
+# getting current directory
 cwd = Path.cwd()
 
 def get_path(p):
     return str(cwd / p)
 
 # Path configuration
-SOURCE_IMAGE_PATH = get_path("source/can_chowder_000001.jpg")
-SOURCE_MASK_PATH  = get_path("source/can_chowder_000001_1_gt.png")
-TARGET_IMAGE_PATH = get_path("source/can_chowder_000004.jpg")
+SOURCE_IMAGE_PATH = get_path("test/can_chowder_000001.jpg")
+SOURCE_MASK_PATH  = get_path("test/can_chowder_000001_1_gt.png")
+TARGET_IMAGE_PATH = get_path("test/can_chowder_000004.jpg")
 
 CHECKPOINT_PATH = get_path("sam2.1_hiera_tiny.pt")
 MODEL_CONFIG = "sam2.1/sam2.1_hiera_t.yaml"
@@ -31,7 +31,7 @@ SAM2_BASE_PATH = os.path.dirname(sam2.__file__)
 OUTPUT_DIR = get_path("output")
 
 # =====================
-# MARK: UTILITY FUNC
+# MARK: UTILITY FUNCTIONS
 # =====================
 
 def create_if_not_exists(dirname):
@@ -70,12 +70,12 @@ def process_img_png_mask(imgpath, maskpath, visualize=False):
 def track_item_boxes(imgpath1, imgpath2, box_list, visualize=True, output_dir="output"):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     
-    # 1. Setup temp directory and copy files
+    # 1. setup temp directory and copy files
     temp_dir = tempfile.mkdtemp()
     shutil.copy(imgpath1, os.path.join(temp_dir, "00000.jpg"))
     shutil.copy(imgpath2, os.path.join(temp_dir, "00001.jpg"))
 
-    # 2. Initialize Predictor
+    # 2. initialize predictor
     config_dir = os.path.join(SAM2_BASE_PATH, "configs")
     GlobalHydra.instance().clear()
     with initialize_config_dir(config_dir=config_dir, version_base=None):
@@ -84,13 +84,13 @@ def track_item_boxes(imgpath1, imgpath2, box_list, visualize=True, output_dir="o
     inference_state = predictor_vid.init_state(video_path=temp_dir)
     predictor_vid.reset_state(inference_state)
 
-    # 3. Add original boxes to Frame 0
+    # 3. add original boxes to frame 0
     for (coords, obj_id) in box_list:
         [xmin, xmax, ymin, ymax] = coords
         box = np.array([xmin, ymin, xmax, ymax], dtype=np.float32)
         predictor_vid.add_new_points_or_box(inference_state, frame_idx=0, obj_id=obj_id, box=box)
 
-    # 4. Propagate Tracking
+    # 4. propagate tracking
     video_segments = {}
     for out_frame_idx, out_obj_ids, out_mask_logits in predictor_vid.propagate_in_video(inference_state):
         video_segments[out_frame_idx] = {
@@ -98,7 +98,7 @@ def track_item_boxes(imgpath1, imgpath2, box_list, visualize=True, output_dir="o
             for i, out_obj_id in enumerate(out_obj_ids)
         }
 
-    # 5. Visualization and Saving Visual Plot
+    # 5. visualization & saving visual plot
     if visualize:
         plt.figure(figsize=(12, 8))
         plt.title("Target Image: Predicted Mask & Bounding Box")
@@ -144,7 +144,7 @@ def run_pipeline():
     coords = process_img_png_mask(SOURCE_IMAGE_PATH, SOURCE_MASK_PATH, visualize=False)
     
     # 2. Run tracking and save the visual plot
-    print("Running SAM 2.1 tracking...")
+    print("Running SAM tracking...")
     results = track_item_boxes(SOURCE_IMAGE_PATH, TARGET_IMAGE_PATH, [(coords, 1)], 
                                visualize=True, output_dir=OUTPUT_DIR)
     
