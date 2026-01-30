@@ -1,6 +1,6 @@
 ---
 title: Sam2 Cmu
-emoji: 🚀
+emoji: 📸
 colorFrom: red
 colorTo: red
 sdk: docker
