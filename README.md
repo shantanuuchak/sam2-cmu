@@ -1,6 +1,6 @@
 # Overview
 
-<video src="header.mp4" autoplay loop muted playsinline width="100%"></video>
+![Banner](banner.png)
 
 This is a repository for the CMU SAM2 project. In this project, I first take a sample image and its corresponding mask, then use them to generate masks for the rest of the images in the dataset. I use the SAM2 model to generate these masks and the `pycocotools` library to evaluate the performance.
 
