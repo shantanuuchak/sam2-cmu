@@ -1,23 +1,23 @@
 # Overview
 
-This is a repository for the CMU SAM2 project. We first take the sample image + corresponding mask and then try to generate masks for the other images in the dataset. We use the SAM2 model to generate the masks. We use the pycocotools library to evaluate the masks. 
+This is a repository for the CMU SAM2 project. In this project, I first take a sample image and its corresponding mask, then use them to generate masks for the rest of the images in the dataset. I use the SAM2 model to generate these masks and the `pycocotools` library to evaluate the performance.
 
 # Requirements
 
-- Requires `uv` as the package manager. Install it using `curl -LsSf https://astral.sh/uv/install.sh | sh`.
-- Requires `python3.12`.
+- Requires `uv` for package management. Install it using `curl -LsSf https://astral.sh/uv/install.sh | sh`.
+- Requires `python 3.12`.
 
 # Usage
 
-- `uv sync` to install dependencies.
-- `uv run main.py` to run the script.
-- `uv run evaluation.py` to evaluate the masks.
+- `uv sync` to install all dependencies.
+- `uv run main.py` to run the tracking script.
+- `uv run evaluation.py` to evaluate the masks and generate reports.
 
 # Dataset
 
-The dataset is available at `products/`. It consists of images and corresponding masks.
+The dataset is available at `products/`. It consists of various product images and their corresponding masks.
 
-> Note: We only use the first image's mask to create embedding to hone zero-shot capabilities of SAM2. Rest of the masks are used for evaluation purposes only.
+> Note: I only use the first image's mask to create the embedding and hone the zero-shot capabilities of SAM2. All other masks are used for evaluation purposes only.
 
 # Web Dashboard
 
