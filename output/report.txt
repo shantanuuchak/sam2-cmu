@@ -1,0 +1,57 @@
+=== SAM 2.1 Full Evaluation Report ===
+
+--- mAP Summary ---
+coke: 0.2509
+potroastsoup: 0.4688
+
+--- Per-Frame Details ---
+Product         | Image                     | IoU Score 
+-------------------------------------------------------
+coke            | diet_coke_000002.jpg      | 0.9608    
+coke            | diet_coke_000003.jpg      | 0.0000    
+coke            | diet_coke_000004.jpg      | 0.0000    
+coke            | diet_coke_000005.jpg      | 0.0000    
+coke            | diet_coke_000006.jpg      | 0.0000    
+coke            | diet_coke_000007.jpg      | 0.0000    
+coke            | diet_coke_000008.jpg      | 0.8889    
+coke            | diet_coke_000009.jpg      | 0.0000    
+coke            | diet_coke_000010.jpg      | 0.0000    
+coke            | diet_coke_000011.jpg      | 0.0000    
+coke            | diet_coke_000012.jpg      | 0.9133    
+coke            | diet_coke_000013.jpg      | 0.9343    
+coke            | diet_coke_000014.jpg      | 0.0000    
+coke            | diet_coke_000015.jpg      | 0.0000    
+coke            | diet_coke_000016.jpg      | 0.9491    
+coke            | diet_coke_000017.jpg      | 0.8932    
+coke            | diet_coke_000018.jpg      | 0.9192    
+coke            | diet_coke_000019.jpg      | 0.0000    
+coke            | diet_coke_000020.jpg      | 0.0000    
+coke            | diet_coke_000021.jpg      | 0.0000    
+coke            | diet_coke_000022.jpg      | 0.3217    
+coke            | diet_coke_000023.jpg      | 0.0938    
+coke            | diet_coke_000024.jpg      | 0.0000    
+coke            | diet_coke_000025.jpg      | 0.7561    
+coke            | diet_coke_000026.jpg      | 0.0000    
+coke            | diet_coke_000027.jpg      | 0.8435    
+coke            | diet_coke_000028.jpg      | 0.9117    
+coke            | diet_coke_000029.jpg      | 0.0000    
+coke            | diet_coke_000030.jpg      | 0.0000    
+potroastsoup    | hc_potroastsoup_000002.jpg | 0.8548    
+potroastsoup    | hc_potroastsoup_000003.jpg | 0.8127    
+potroastsoup    | hc_potroastsoup_000004.jpg | 0.8892    
+potroastsoup    | hc_potroastsoup_000005.jpg | 0.8823    
+potroastsoup    | hc_potroastsoup_000006.jpg | 0.6024    
+potroastsoup    | hc_potroastsoup_000007.jpg | 0.4280    
+potroastsoup    | hc_potroastsoup_000008.jpg | 0.3811    
+potroastsoup    | hc_potroastsoup_000009.jpg | 0.5757    
+potroastsoup    | hc_potroastsoup_000010.jpg | 0.8762    
+potroastsoup    | hc_potroastsoup_000011.jpg | 0.6856    
+potroastsoup    | hc_potroastsoup_000012.jpg | 0.8851    
+potroastsoup    | hc_potroastsoup_000013.jpg | 0.9453    
+potroastsoup    | hc_potroastsoup_000014.jpg | 0.5942    
+potroastsoup    | hc_potroastsoup_000015.jpg | 0.8674    
+potroastsoup    | hc_potroastsoup_000016.jpg | 0.8944    
+potroastsoup    | hc_potroastsoup_000017.jpg | 0.8036    
+potroastsoup    | hc_potroastsoup_000018.jpg | 0.7235    
+potroastsoup    | hc_potroastsoup_000019.jpg | 0.7986    
+potroastsoup    | hc_potroastsoup_000020.jpg | 0.9430    

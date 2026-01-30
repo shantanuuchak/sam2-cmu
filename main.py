@@ -30,9 +30,9 @@ MODEL_CONFIG = "sam2.1/sam2.1_hiera_t.yaml"
 SAM2_BASE_PATH = os.path.dirname(sam2.__file__)
 OUTPUT_DIR = get_path("output")
 
-# =============================================================================
-# UTILITY FUNCTIONS
-# =============================================================================
+# =====================
+# MARK: UTILITY FUNC
+# =====================
 
 def create_if_not_exists(dirname):
     if not os.path.exists(dirname):
@@ -132,61 +132,9 @@ def track_item_boxes(imgpath1, imgpath2, box_list, visualize=True, output_dir="o
     shutil.rmtree(temp_dir)
     return video_segments
 
-
-# MARK: TEST
-import glob
-
-def process_all_products(products_root):
-    # 1. Get all product subdirectories
-    product_dirs = [d for d in Path(products_root).iterdir() if d.is_dir()]
-    
-    overall_results = {}
-
-    for p_dir in product_dirs:
-        product_name = p_dir.name
-        print(f"\nProcessing product: {product_name}")
-        
-        # 2. Get all images and SORT them to ensure 000001 is first
-        all_images = sorted(list(p_dir.glob("*.jpg")))
-        if not all_images:
-            continue
-            
-        source_img = str(all_images[0])
-        # Derive mask name from source image name (pattern: image_name_1_gt.png)
-        source_mask = source_img.replace(".jpg", "_1_gt.png")
-        
-        if not os.path.exists(source_mask):
-            print(f"Skipping {product_name}: Source mask not found.")
-            continue
-
-        # 3. Initialize the model with the FIRST frame only
-        # We send these to SAM2 to create the 'embedding'
-        coords_seed = process_img_png_mask(source_img, source_mask, visualize=False)
-        
-        # 4. Prepare the rest of the images for tracking
-        target_images = all_images[1:] 
-        
-        # Note: In a real video predictor, we'd feed the whole folder to init_state.
-        # Since these are discrete files, we can copy them to a temp folder 
-        # in the correct sequence (00000, 00001, 00002...)
-        
-        # 5. Loop through targets and evaluate
-        for t_img_path in target_images:
-            t_img_str = str(t_img_path)
-            t_mask_gt_path = t_img_str.replace(".jpg", "_1_gt.png")
-            
-            # Prediction from SAM2 (zero-shot)
-            # ... model logic here ...
-            
-            # Manual Box from GT for evaluation
-            if os.path.exists(t_mask_gt_path):
-                gt_coords = process_img_png_mask(t_img_str, t_mask_gt_path, visualize=False)
-                # Now compare gt_coords vs predicted_coords
-                # Calculate IoU
-
-# =============================================================================
-# MAIN EXECUTION
-# =============================================================================
+# =====================
+# MARK: MAIN EXECUTION
+# =====================
 
 def run_pipeline():
     create_if_not_exists(OUTPUT_DIR)
@@ -206,8 +154,8 @@ def run_pipeline():
     binary_save_path = os.path.join(OUTPUT_DIR, "predicted_mask_binary.png")
     Image.fromarray(mask_img).save(binary_save_path)
     
-    print(f"Raw binary mask saved to: {binary_save_path}")
-    print("Done.")
+    print(f"Saved to: {binary_save_path}")
+    print("Finished!")
 
 if __name__ == "__main__":
     run_pipeline()
