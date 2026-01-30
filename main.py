@@ -10,17 +10,25 @@ from hydra import initialize_config_dir
 from sam2.build_sam import build_sam2_video_predictor
 import sam2
 
+# Getting current directory
+from pathlib import Path
+cwd = Path.cwd()
+
+def get_path(file_name):
+    return str(cwd) + '/' + file_name
+
+
 # =============================================================================
 # 1. INPUT CONFIGURATION
 # =============================================================================
 # Paths to your local images and mask
-SOURCE_IMAGE_PATH = "/workspaces/sam2-cmu/source/can_chowder_000001.jpg"
-SOURCE_MASK_PATH = "/workspaces/sam2-cmu/source/can_chowder_000001_1_gt.png"
-TARGET_IMAGE_PATH = "/workspaces/sam2-cmu/source/can_chowder_000003.jpg"
+SOURCE_IMAGE_PATH = get_path('source/can_chowder_000001.jpg')
+SOURCE_MASK_PATH = get_path('source/can_chowder_000001_1_gt.png')
+TARGET_IMAGE_PATH = get_path('source/can_chowder_000004.jpg')
 
 # Path to your SAM2 installation and weights - AUTO-DETECTED
 SAM2_BASE_PATH = os.path.dirname(sam2.__file__)
-CHECKPOINT_PATH = "/workspaces/sam2-cmu/sam2.1_hiera_tiny.pt"
+CHECKPOINT_PATH = get_path('sam2.1_hiera_tiny.pt')
 MODEL_CONFIG = "sam2.1/sam2.1_hiera_t.yaml"
 
 # =============================================================================
@@ -115,7 +123,7 @@ def run_transcoding():
         plt.tight_layout()
         
         # Save the figure
-        output_path = "/workspaces/sam2-cmu/transcoding_result.png"
+        output_path = get_path('transcoding_result.png')
         plt.savefig(output_path, dpi=150, bbox_inches='tight')
         print(f"Results saved to: {output_path}")
         
