@@ -17,7 +17,7 @@ This is a repository for the CMU SAM2 project. In this project, I first take a s
 
 # Dataset
 
-The dataset is available at `products/`. It consists of various product images and their corresponding masks.
+The dataset is available at `products/`. It consists of various product images and their corresponding masks. You can download the sample dataset from Carnegie Mellon University here: [CMU10_3D.zip](http://www.cs.cmu.edu/~ehsiao/3drecognition/CMU10_3D.zip)
 
 > Note: I only use the first image's mask to create the embedding and hone the zero-shot capabilities of SAM2. All other masks are used for evaluation purposes only.
 
